@@ -70,7 +70,7 @@ function DownloadPlugin() {
 function LinkDir() {
   mkdir -p $install_user_home/.config
   rm -f $install_user_home/.config/nvim
-  target_dir=`pwd`"/VimForCpp/"
+  target_dir=`pwd`"/VimForCpp"
   ln -s $target_dir/vim $install_user_home/.config/nvim
   
   # 修改文件拥有者, 获得权限
@@ -86,3 +86,4 @@ DownloadVimConfig
 DownloadPlugin
 # 4. 备份对应用户的 .vim 目录, 并且建立好连接, 并修改文件权限
 LinkDir
+echo '安装成功! 请手动执行 "source /etc/bashrc" 使 vim 配置生效!'
