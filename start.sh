@@ -68,8 +68,8 @@ function DownloadPlugin() {
 }
 
 function LinkDir() {
-  today=`date +%m%d`
   mkdir -p $install_user_home/.config
+  rm -f $install_user_home/.config/nvim
   target_dir=`pwd`"/VimForCpp/"
   ln -s $target_dir/vim $install_user_home/.config/nvim
   
