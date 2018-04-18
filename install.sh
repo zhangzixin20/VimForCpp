@@ -1,27 +1,17 @@
 #!/usr/bin/sh
-function PreWork() {
+install_user_home=$HOME
+
+function SwitchRoot() {
   echo "尝试切换到 root 用户, 请输入 root 密码:"
   su
-}
-
-function CheckArg() {
   if [ $HOME != "/root" ]; then
-    echo "安装失败! 请先切换到 root 用户再执行安装脚本! "
+    echo "安装失败! 切换 root 用户失败"
     exit 1
   fi
-  if [ $# -lt 1 ]; then
-    echo "安装失败! 使用方法 ./install.sh [用户名]"
-    exit 1
-  fi
-  user=$1
-  if [ ! -d /home/$user ]; then
-    echo "安装失败! 用户名: $user 不存在!"
-    exit 1
-  fi
-  echo "参数检测完毕!"
+  echo "切换到 root 用户完毕!"
 }
 
-function CheckEnv() {
+function InstallEnv() {
   # 检查操作系统版本是否 ok
   version_ok=`uname -a | awk { if (index($0, "el7.x86_64") > 0) print 1; else print 0;}`
   if [ $version_ok -eq 0 ]; then
@@ -60,10 +50,19 @@ function CheckEnv() {
   echo "环境检测完毕!"
 }
 
+function DownloadVimConfig() {
+  git clone https://gitee.com/HGtz2222/VimForCpp.git
+  if [ $? -ne 0 ]; then
+    echo "Vim 配置下载出错!"
+    exit 1
+  fi
+  echo "Vim 配置下载完毕"
+}
+
 function DownloadPlugin() {
-  cur_dir=`pwd`"/bundle/"
+  target_dir=`pwd`"/VimForCpp/bundle/"
   git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/
-  mv /tmp/vim-plugin-fork/* $cur_dir
+  mv /tmp/vim-plugin-fork/* $target_dir
   if [ $? -ne 0 ]; then
     echo "插件下载出错!"
     exit 1
@@ -73,20 +72,24 @@ function DownloadPlugin() {
 }
 
 function LinkDir() {
-  user=$1
   today=`date +%m%d`
-  mkdir -p /home/$user/.config
-  root_dir=`pwd`
-  ln -s $root_dir/vim /home/$user/.config/nvim
+  mkdir -p $install_user_home/.config
+  target_dir=`pwd`"/VimForCpp/"
+  ln -s $target_dir/vim $install_user_home/.config/nvim
+  
+  # 修改文件拥有者, 获得权限
+  install_user=`echo $install_user_home | awk -F '/' '{print $2}'`
+  chown -R $install_user:$install_user $target_dir
+  chown -R $install_user:$install_user $install_user_home/.config/nvim
 }
 
-# 0. 需要先切换到 root 用户下
-PreWork
-# 1. 通过参数指定安装到哪个用户中
-CheckArg $1
+# 1. 切换到 root 用户
+SwitchRoot
 # 2. 检查并安装依赖的软件
-CheckEnv
-# 3. 从码云上下载依赖的插件
+InstallEnv
+# 3. 从码云上下载 vim 配置
+DownloadVimConfig
+# 4. 从码云上下载依赖的插件
 DownloadPlugin
-# 4. 备份对应用户的 .vim 目录, 并且建立好连接, 并修改文件权限
-LinkDir $1
+# 5. 备份对应用户的 .vim 目录, 并且建立好连接, 并修改文件权限
+LinkDir
