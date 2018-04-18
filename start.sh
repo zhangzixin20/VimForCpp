@@ -74,7 +74,7 @@ function LinkDir() {
   ln -s $target_dir/vim $install_user_home/.config/nvim
   
   # 修改文件拥有者, 获得权限
-  install_user=`echo $install_user_home | awk -F '/' '{print $2}'`
+  install_user=`echo $install_user_home | awk -F '/' '{print $3}'`
   chown -R $install_user:$install_user $target_dir
   chown -R $install_user:$install_user $install_user_home/.config/nvim
 }
