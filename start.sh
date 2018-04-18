@@ -56,7 +56,7 @@ function DownloadPlugin() {
   if [ -d /tmp/vim-plugin-fork ]; then
     rm -rf /tmp/vim-plugin-fork
   fi
-  target_dir=`pwd`"/VimForCpp/bundle/"
+  target_dir=`pwd`"/VimForCpp/vim/bundle/"
   git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/vim-plugin-fork
   mv /tmp/vim-plugin-fork/* $target_dir
   if [ $? -ne 0 ]; then
