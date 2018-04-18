@@ -35,12 +35,15 @@ function InstallEnv() {
   grep -q "nvim" /etc/bashrc
   if [ $? -ne 0 ]; then
     echo 'alias vim="nvim"' >> /etc/bashrc
-    source /etc/bashrc
+    # source /etc/bashrc
   fi
   echo "环境检测完毕!"
 }
 
 function DownloadVimConfig() {
+  if [ -d ./VimForCpp ]; then
+    rm -rf ./VimForCpp
+  fi
   git clone https://gitee.com/HGtz2222/VimForCpp.git
   if [ $? -ne 0 ]; then
     echo "Vim 配置下载出错!"
@@ -50,6 +53,9 @@ function DownloadVimConfig() {
 }
 
 function DownloadPlugin() {
+  if [ -d /tmp/vim-plugin-fork ]; then
+    rm -rf /tmp/vim-plugin-fork
+  fi
   target_dir=`pwd`"/VimForCpp/bundle/"
   git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/vim-plugin-fork
   mv /tmp/vim-plugin-fork/* $target_dir
