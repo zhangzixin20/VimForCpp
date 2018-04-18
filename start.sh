@@ -3,7 +3,7 @@ install_user_home=$1
 
 function InstallEnv() {
   # 检查操作系统版本是否 ok
-  version_ok=`uname -a | awk { if (index($0, "el7.x86_64") > 0) print 1; else print 0;}`
+  version_ok=`uname -a | awk '{ if (index($0, "el7.x86_64") > 0) print 1; else print 0;}'`
   if [ $version_ok -eq 0 ]; then
     echo "操作系统版本不支持! 目前只支持 centos7 x86_64!"
     exit 1
@@ -51,7 +51,7 @@ function DownloadVimConfig() {
 
 function DownloadPlugin() {
   target_dir=`pwd`"/VimForCpp/bundle/"
-  git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/
+  git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/vim-plugin-fork
   mv /tmp/vim-plugin-fork/* $target_dir
   if [ $? -ne 0 ]; then
     echo "插件下载出错!"
