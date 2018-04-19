@@ -9,24 +9,24 @@ function InstallEnv() {
     exit 1
   fi
   # 安装 git
-  git --version
+  git --version > /dev/null
   if [ $? -ne 0 ]; then
     echo "未安装 git, 尝试安装 git"
     yum -y install git
   fi
-  git --version
+  git --version > /dev/null
   if [ $? -ne 0 ]; then
     echo "git 安装失败!"
     exit 1
   fi
   # 安装 neovim
-  nvim --version
+  nvim --version > /dev/null
   if [ $? -ne 0 ]; then
     echo "未安装 neovim, 尝试安装 neovim"
     yum -y install epel-release
     yum install -y neovim.x86_64 python2-neovim.noarch
   fi
-  nvim --version
+  nvim --version > /dev/null
   if [ $? -ne 0 ]; then
     echo "neovim 安装失败!"
     exit 1
@@ -73,6 +73,7 @@ function LinkDir() {
   today=`date +%m%d`
   mv $install_user_home/.vim $install_user_home/.vim.bak_${today}
   mv $install_user_home/.vimrc $install_user_home/.vimrc.bak_${today}
+  mv $install_user_home/.ycm_extra_conf.py $install_user_home/.ycm_extra_conf.py.bak_${today}
 
   # 创建需要的软连接
   mkdir -p $install_user_home/.config
