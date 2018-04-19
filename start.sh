@@ -56,25 +56,15 @@ function DownloadPlugin() {
   if [ -d /tmp/vim-plugin-fork ]; then
     rm -rf /tmp/vim-plugin-fork
   fi
-  target_dir=`pwd`"/VimForCpp/vim/bundle/"
+  bundle_dir=`pwd`"/VimForCpp/vim/bundle"
   git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/vim-plugin-fork
-  mv /tmp/vim-plugin-fork/* $target_dir
+  mv /tmp/vim-plugin-fork/* $bundle_dir
   if [ $? -ne 0 ]; then
     echo "插件下载出错!"
     exit 1
   fi
   rm -rf /tmp/vim-plugin-fork/
-  # 下载 ycm 依赖的动态库. 避免手动编译
-  curl "https://gitee.com/HGtz2222/vim-plugin-fork/attach_files/download?i=130042&u=http%3A%2F%2Ffiles.git.oschina.net%2Fgroup1%2FM00%2F03%2F65%2FPaAvDFrYOvKAHjGcACkHeFv_r4E.for_ce%3Ftoken%3Ddc91b8fe064155333b0b78b6efa84916%26ts%3D1524120964%26attname%3Dycm_core.so.for_centos_x86_64" -o $target_dir/YouCompleteMe/third_party/ycmd/ycm_core.so
-  curl "https://gitee.com/HGtz2222/vim-plugin-fork/attach_files/download?i=130053&u=http%3A%2F%2Ffiles.git.oschina.net%2Fgroup1%2FM00%2F03%2F65%2FPaAvDFrYPYSAYjwoA5IZCKxWtw4.for_ce%3Ftoken%3Dbf50fa04023df4c679e862563126210c%26ts%3D1524120964%26attname%3Dlibclang.so.4.0.for_centos7_x86_64" -o $target_dir/YouCompleteMe/third_party/ycmd/libclang.so.4
-  if [ ! -f $target_dir/YouCompleteMe/third_party/ycmd/ycm_core.so ]; then
-    echo "ycm_core.so 下载失败!"
-    exit 1
-  fi
-  if [ ! -f $target_dir/YouCompleteMe/third_party/ycmd/libclang.so.4 ]; then
-    echo "libclang.so.4 下载失败!"
-    exit 1
-  fi
+  mv $bundle_dir/YCM.so/el7.x86_64/* $bundle_dir/YouCompleteMe/third_party/ycmd/
   echo "插件下载完毕"
 }
 
