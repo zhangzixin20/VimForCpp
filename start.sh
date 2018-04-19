@@ -81,6 +81,7 @@ function LinkDir() {
   ln -s $target_dir/vim $install_user_home/.config/nvim
   ln -s $target_dir/vim $install_user_home/.vim
   ln -s $target_dir/vim/init.vim $install_user_home/.vimrc
+  ln -s $target_dir/ycm_extra_conf.py $install_user_home/.ycm_extra_conf.py
   
   # 修改文件拥有者, 获得权限
   install_user=`echo $install_user_home | awk -F '/' '{print $3}'`
@@ -88,6 +89,7 @@ function LinkDir() {
   chown -R $install_user:$install_user $install_user_home/.config/nvim
   chown -R $install_user:$install_user $install_user_home/.vim
   chown -R $install_user:$install_user $install_user_home/.vimrc
+  chown -R $install_user:$install_user $install_user_home/.ycm_extra_conf.py
 }
 # 1. 检查并安装依赖的软件
 InstallEnv
