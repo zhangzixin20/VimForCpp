@@ -100,4 +100,4 @@ DownloadVimConfig
 DownloadPlugin
 # 4. 备份对应用户的 .vim 目录, 并且建立好连接, 并修改文件权限
 LinkDir
-echo '安装成功! 请手动执行 "source /etc/bashrc" 使 vim 配置生效!'
+echo '安装成功! 请手动执行 "source /etc/bashrc" 或者重启终端, 使 vim 配置生效!'
