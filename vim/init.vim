@@ -85,7 +85,6 @@ nnoremap <space>t :AT<cr>
 nnoremap <space>e :tabe 
 
 
-
 """""""""""""""""""""""""" airline 彩色状态栏/标签页
 " 这几个是挑选的还不错的几个 airline 主题
 " let g:airline_theme="ravenpower"
