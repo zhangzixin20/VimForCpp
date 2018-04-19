@@ -1,15 +1,3 @@
-"""""""""""""""""""""""""" 主题
-" colorscheme atom
-" colorscheme molokai
-colorscheme luna-term
-
-" 以下为 gruvbox 主题专用 
-" colorscheme gruvbox
-" let g:gruvbox_contrast_light="light"
-" let g:gruvbox_contrast_dark="hard"
-" let g:gruvbox_improved_warnings=1
-
-
 """""""""""""""""""""""""" Vundle 插件管理器
 set nocompatible
 filetype off
@@ -28,6 +16,18 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 call vundle#end()
 filetype plugin indent on
+
+
+"""""""""""""""""""""""""" 主题
+" colorscheme atom
+" colorscheme molokai
+colorscheme luna-term
+
+" 以下为 gruvbox 主题专用 
+" colorscheme gruvbox
+" let g:gruvbox_contrast_light="light"
+" let g:gruvbox_contrast_dark="hard"
+" let g:gruvbox_improved_warnings=1
 
 
 """""""""""""""""""""""""" 零碎配置
