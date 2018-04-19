@@ -69,15 +69,25 @@ function DownloadPlugin() {
 }
 
 function LinkDir() {
+  # 先备份原有的 vim 配置文件
+  today=`date +%m%d`
+  mv $install_user_home/.vim $install_user_home/.vim.bak_${today}
+  mv $install_user_home/.vimrc $install_user_home/.vimrc.bak_${today}
+
+  # 创建需要的软连接
   mkdir -p $install_user_home/.config
   rm -f $install_user_home/.config/nvim
   target_dir=`pwd`"/VimForCpp"
   ln -s $target_dir/vim $install_user_home/.config/nvim
+  ln -s $target_dir/vim $install_user_home/.vim
+  ln -s $target_dir/vim/init.vim $install_user_home/.vimrc
   
   # 修改文件拥有者, 获得权限
   install_user=`echo $install_user_home | awk -F '/' '{print $3}'`
   chown -R $install_user:$install_user $target_dir
   chown -R $install_user:$install_user $install_user_home/.config/nvim
+  chown -R $install_user:$install_user $install_user_home/.vim
+  chown -R $install_user:$install_user $install_user_home/.vimrc
 }
 # 1. 检查并安装依赖的软件
 InstallEnv
