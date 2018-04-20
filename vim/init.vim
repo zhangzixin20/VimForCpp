@@ -14,6 +14,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'python-mode/python-mode'
 call vundle#end()
 filetype plugin indent on
 
