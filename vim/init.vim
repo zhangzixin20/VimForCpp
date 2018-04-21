@@ -1,23 +1,49 @@
 """""""""""""""""""""""""" Vundle 插件管理器
-set nocompatible
-filetype off
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'morhetz/gruvbox'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'SirVer/ultisnips'
-Plugin 'tpope/vim-surround'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'python-mode/python-mode'
-call vundle#end()
-filetype plugin indent on
+" set nocompatible
+" filetype off
+" set rtp+=~/.config/nvim/bundle/Vundle.vim
+" call vundle#begin()
+" Plugin 'VundleVim/Vundle.vim'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'bling/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'morhetz/gruvbox'
+" Plugin 'octol/vim-cpp-enhanced-highlight'
+" Plugin 'SirVer/ultisnips'
+" Plugin 'tpope/vim-surround'
+" Plugin 'flazz/vim-colorschemes'
+" Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'python-mode/python-mode'
+" Plugin 'Shougo/deoplete.nvim'
+" call vundle#end()
+" filetype plugin indent on
 
+call plug#begin('~/.vim/bundle')
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+" Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-surround'
+Plug 'flazz/vim-colorschemes'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'python-mode/python-mode'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+call plug#end()
+
+let g:deoplete#enable_at_startup = 1
+
+let g:LanguageClient_serverCommands = {
+\ 'cpp': ['/home/tangzhong/install/cquery-v20180302-x86_64-unknown-linux-gnu/bin/cquery', '--log-file=/tmp/cq.log']                                                                                                                                                                              
+\ }
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = '/home/tangzhong/.config/nvim/settings.json'
 
 """""""""""""""""""""""""" 主题
 " colorscheme atom
