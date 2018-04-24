@@ -50,3 +50,17 @@
   S+(         给选中文本外面加一层括号(带空格)
   S+)         给选中文本外面加一层括号(不带空格)
 ```
+
+## 关于图标显示
+基于 vim-devicons 展示图标. 
+vim-devicons依赖 Nerd Font 
+
+<a href="https://github.com/ryanoasis/nerd-fonts">nerd-fonts</a>
+
+如果使用 xshell 登录 Linux, 需要在 Windows 上安装 nerd-fonts. 并且在 xshell 中设置字体为 nerd-fonts. 但是由于 xshell 只支持等宽字体, 因此 nerd-fonts 中大部分字体是不能被 xshell 识别的. 
+此处我找到了几个可以使用的 nerd-fonts. 其他的没有进一步测试.
+
+<a href="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.otf">DroidSansMono</a>
+
+其他字体可以参考文件  **xshell可用字体** 
+
