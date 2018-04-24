@@ -1,23 +1,20 @@
-"""""""""""""""""""""""""" Vundle 插件管理器
-set nocompatible
-filetype off
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'morhetz/gruvbox'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'SirVer/ultisnips'
-Plugin 'tpope/vim-surround'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'python-mode/python-mode'
-Plugin 'ryanoasis/vim-devicons'
-call vundle#end()
-filetype plugin indent on
+"""""""""""""""""""""""""" vim-plug 插件管理器
+" PlugInstall 安装插件
+" PlugUpgrade 更新 vim-plug 自身
+call plug#begin('~/.vim/bundle')
+Plug 'Valloric/YouCompleteMe'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-surround'
+Plug 'flazz/vim-colorschemes'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'python-mode/python-mode'
+Plug 'ryanoasis/vim-devicons'
+call plug#end()
 
 
 """""""""""""""""""""""""" 主题
@@ -165,7 +162,7 @@ set foldmethod=indent
 set foldlevel=99
 " 代码折叠自定义快捷键 zz
 let g:FoldMethod = 0
-noremap zz :call ToggleFold()<cr>
+nnoremap zz :call ToggleFold()<cr>
 fun! ToggleFold()
     if g:FoldMethod == 0
         exe "normal! zM"
@@ -212,6 +209,9 @@ let g:ycm_confirm_extra_conf = 0
 "let g:ycm_key_invoke_completion='<C-j>'
 let g:ycm_error_symbol = 'E>'
 let g:ycm_warning_symbol = 'W>'
+" 使用 NerdFont 中的图标表示错误和警告
+" let g:ycm_error_symbol = '﯇'
+" let g:ycm_warning_symbol = '卵'
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_enable_diagnostic_highlighting = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
@@ -226,7 +226,7 @@ let g:ycm_semantic_triggers =  {
 
 
 """""""""""""""""""""""""" Tagbar(函数列表)
-nmap <F6> :TagbarToggle<CR>
+nnoremap <F6> :TagbarToggle<CR>
 let g:tagbar_ctags_bin='/usr/bin/ctags'
 let g:tagbar_width=20
 let g:tagbar_left=1
@@ -234,12 +234,11 @@ let g:tagbar_sort = 0
 
 
 """""""""""""""""""""""""" Dox(注释文档)
-map <F8> :Dox<RETURN><ESC>
+nnoremap <F8> :Dox<RETURN><ESC>
 
 
 """""""""""""""""""""""""" NERDTree(文件列表)
-map <F7> :NERDTreeToggle<RETURN>
-imap <F7> :NERDTreeToggle<RETURN>
+nnoremap <F7> :NERDTreeToggle<RETURN>
 let g:NERDTreeWinPos="right"
 let g:NERDTreeWinSize=20
 
