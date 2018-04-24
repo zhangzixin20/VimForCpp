@@ -37,6 +37,8 @@ function InstallEnv() {
     echo 'alias vim="nvim"' >> /etc/bashrc
     # source /etc/bashrc
   fi
+  # 安装 ctags
+  yum -y install ctags
   echo "环境检测完毕!"
 }
 
