@@ -1,7 +1,7 @@
 """""""""""""""""""""""""" vim-plug 插件管理器
 " PlugInstall 安装插件
 " PlugUpgrade 更新 vim-plug 自身
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/.vim/bundle/vim-plugin-fork')
 Plug 'Valloric/YouCompleteMe'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
