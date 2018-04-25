@@ -10,9 +10,10 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
 Plug 'flazz/vim-colorschemes'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'python-mode/python-mode'
+Plug 'Yggdroot/LeaderF'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -263,3 +264,10 @@ let g:UltiSnipsListSnippets="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrgger="<C-k>"
 
+
+"""""""""""""""""""""""""" LeadF
+let g:Lf_WindowHeight = 0.30
+let g:Lf_ShortcutF = '<c-p>'
+nnoremap <space>fm :LeaderfMru<cr>
+nnoremap <space>ff :LeaderfFunction<cr>
+nnoremap <space>fb :LeaderfBuffer<cr>
