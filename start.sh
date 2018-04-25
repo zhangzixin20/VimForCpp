@@ -59,15 +59,14 @@ function DownloadPlugin() {
     rm -rf /tmp/vim-plugin-fork
   fi
   bundle_dir=`pwd`"/VimForCpp/vim/bundle"
-  git clone https://gitee.com/HGtz2222/vim-plugin-fork.git $bundle_dir
+  git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/vim-plugin-fork
+  mv /tmp/vim-plugin-fork/* $bundle_dir
   if [ $? -ne 0 ]; then
     echo "插件下载出错!"
     exit 1
   fi
-  mv $bundle_dir/vim-plugin-fork/YCM.so/el7.x86_64/* $bundle_dir/vim-plugin-fork/YouCompleteMe/third_party/ycmd/
-  if [ $? -ne 0 ]; then
-    echo "移动 ycm_core.so 出错!"
-  fi
+  rm -rf /tmp/vim-plugin-fork/
+  mv $bundle_dir/YCM.so/el7.x86_64/* $bundle_dir/YouCompleteMe/third_party/ycmd/
   echo "插件下载完毕"
 }
 
