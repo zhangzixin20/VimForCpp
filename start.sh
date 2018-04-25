@@ -60,11 +60,12 @@ function DownloadPlugin() {
   fi
   bundle_dir=`pwd`"/VimForCpp/vim/bundle"
   git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/vim-plugin-fork
-  mv /tmp/vim-plugin-fork/* $bundle_dir
+  mv /tmp/vim-plugin-fork/* $bundle_dir/
   if [ $? -ne 0 ]; then
     echo "插件下载出错!"
     exit 1
   fi
+  mv /tmp/vim-plugin-fork/.git $bundle_dir/
   rm -rf /tmp/vim-plugin-fork/
   mv $bundle_dir/YCM.so/el7.x86_64/* $bundle_dir/YouCompleteMe/third_party/ycmd/
   echo "插件下载完毕"
@@ -73,9 +74,9 @@ function DownloadPlugin() {
 function LinkDir() {
   # 先备份原有的 vim 配置文件
   today=`date +%m%d`
-  mv $install_user_home/.vim $install_user_home/.vim.bak_${today}
-  mv $install_user_home/.vimrc $install_user_home/.vimrc.bak_${today}
-  mv $install_user_home/.ycm_extra_conf.py $install_user_home/.ycm_extra_conf.py.bak_${today}
+  mv $install_user_home/.vim $install_user_home/.vim.bak_${today} 2>/dev/null
+  mv $install_user_home/.vimrc $install_user_home/.vimrc.bak_${today} 2>/dev/null
+  mv $install_user_home/.ycm_extra_conf.py $install_user_home/.ycm_extra_conf.py.bak_${today} 2>/dev/null
 
   # 创建需要的软连接
   mkdir -p $install_user_home/.config
