@@ -20,13 +20,10 @@ function InstallEnv() {
     exit 1
   fi
   # 安装 neovim
-  nvim --version > /dev/null
-  if [ $? -ne 0 ]; then
-    echo "未安装 neovim, 尝试安装 neovim"
-    yum -y install epel-release
-    yum install -y neovim.x86_64 python2-neovim.noarch
-  fi
-  nvim --version > /dev/null
+  echo "尝试安装 neovim"
+  yum -y install epel-release
+  yum install -y neovim.x86_64 python2-neovim.noarch
+  nvim --version
   if [ $? -ne 0 ]; then
     echo "neovim 安装失败!"
     exit 1
