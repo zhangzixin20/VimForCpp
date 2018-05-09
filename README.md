@@ -1,7 +1,9 @@
 # VimForCpp
+## 项目简介
+本项目主要目标是帮助对vim配置方法不熟悉的新手封装的一键式vim环境安装包. 主要针对终端vim用户, 适合远程ssh连接Linux服务器进行开发的场景. 
+
 ## 特点
-本项目特点:
->* 安装速度快(使用码云而不是github作为源). 网络畅通情况下, 2分钟内完成 vim 插件安装
+>* 安装速度快(使用码云而不是github作为源). 网络畅通情况下, 几分钟内完成 vim 插件安装
 >* 无需编译直接使用 YouComplete(直接下载预编译好的 ycm\_core.so). 
 >* 一键式安装. 真正做到一键式安装. 不光能一键式安装 Vim 配置, 同时也会安装依赖的程序(包括 git, neovim)
 
@@ -15,6 +17,36 @@
   curl -sLf https://gitee.com/HGtz2222/VimForCpp/raw/master/install.sh -o /tmp/install.sh && bash /tmp/install.sh
 
 需要按照提示输入 root 密码. 您的 root 密码不会被上传, 请放心输入.
+
+## 功能演示
+### 语法高亮
+TODO
+### 自动补全(语义级别补全+模糊匹配)
+TODO
+### 头文件补全
+TODO
+### 代码片段
+TODO
+### 语法诊断
+TODO
+### 跳转到变量/函数声明/定义
+TODO
+### 跳转到头文件
+TODO
+### 函数列表
+TODO
+### 函数查找
+TODO
+### 文件列表
+TODO
+### 文件查找
+TODO
+### 调试集成
+TODO
+### 一键运行
+TODO
+### 文档注释
+TODO
 
 ## 快速使用
 
