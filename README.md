@@ -12,7 +12,7 @@
 
 ## 安装方法
 
-在 shell 中执行指令: 
+在 shell 中执行指令(想在哪个用户下让vim配置生效, 就在哪个用户下执行这个指令. 强烈 "不推荐" 直接在 root 下执行): 
 
   curl -sLf https://gitee.com/HGtz2222/VimForCpp/raw/master/install.sh -o /tmp/install.sh && bash /tmp/install.sh
 
