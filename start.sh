@@ -1,5 +1,6 @@
 #!/usr/bin/sh
 install_user_home=$1
+vimforcpp_home=/home/$install_user_home/.VimForCpp
 
 function InstallEnv() {
   # 检查操作系统版本是否 ok
@@ -40,10 +41,10 @@ function InstallEnv() {
 }
 
 function DownloadVimConfig() {
-  if [ -d ./VimForCpp ]; then
-    rm -rf ./VimForCpp
+  if [ -d $vimforcpp_home ]; then
+    rm -rf $vimforcpp_home
   fi
-  git clone https://gitee.com/HGtz2222/VimForCpp.git
+  git clone https://gitee.com/HGtz2222/VimForCpp.git $vimforcpp_home
   if [ $? -ne 0 ]; then
     echo "Vim 配置下载出错!"
     exit 1
@@ -52,19 +53,13 @@ function DownloadVimConfig() {
 }
 
 function DownloadPlugin() {
-  if [ -d /tmp/vim-plugin-fork ]; then
-    rm -rf /tmp/vim-plugin-fork
-  fi
-  bundle_dir=`pwd`"/VimForCpp/vim/bundle"
-  git clone https://gitee.com/HGtz2222/vim-plugin-fork.git /tmp/vim-plugin-fork
-  mv /tmp/vim-plugin-fork/* $bundle_dir/
+  bundle_dir=$vimforcpp_home/vim/bundle
+  git clone https://gitee.com/HGtz2222/vim-plugin-fork.git $bundle_dir
   if [ $? -ne 0 ]; then
     echo "插件下载出错!"
     exit 1
   fi
-  mv /tmp/vim-plugin-fork/.git $bundle_dir/
-  rm -rf /tmp/vim-plugin-fork/
-  mv $bundle_dir/YCM.so/el7.x86_64/* $bundle_dir/YouCompleteMe/third_party/ycmd/
+  cp $bundle_dir/YCM.so/el7.x86_64/* $bundle_dir/YouCompleteMe/third_party/ycmd/
   echo "插件下载完毕"
 }
 
@@ -78,15 +73,14 @@ function LinkDir() {
   # 创建需要的软连接
   mkdir -p $install_user_home/.config
   rm -f $install_user_home/.config/nvim
-  target_dir=`pwd`"/VimForCpp"
-  ln -s $target_dir/vim $install_user_home/.config/nvim
-  ln -s $target_dir/vim $install_user_home/.vim
-  ln -s $target_dir/vim/init.vim $install_user_home/.vimrc
-  ln -s $target_dir/ycm_extra_conf.py $install_user_home/.ycm_extra_conf.py
+  ln -s $vimforcpp_home/vim $install_user_home/.config/nvim
+  ln -s $vimforcpp_home/vim $install_user_home/.vim
+  ln -s $vimforcpp_home/vim/init.vim $install_user_home/.vimrc
+  ln -s $vimforcpp_home/ycm_extra_conf.py $install_user_home/.ycm_extra_conf.py
   
   # 修改文件拥有者, 获得权限
   install_user=`echo $install_user_home | awk -F '/' '{print $3}'`
-  chown -R $install_user:$install_user $target_dir
+  chown -R $install_user:$install_user $vimforcpp_home
   chown -R $install_user:$install_user $install_user_home/.config/nvim
   chown -R $install_user:$install_user $install_user_home/.vim
   chown -R $install_user:$install_user $install_user_home/.vimrc
