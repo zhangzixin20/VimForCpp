@@ -30,10 +30,10 @@ function InstallEnv() {
     exit 1
   fi
   # 敲下 vim 命令实际启动了 nvim
-  grep -q "nvim" /etc/bashrc
+  touch $install_user_home/.bashrc
+  grep -q "nvim" $install_user_home/.bashrc
   if [ $? -ne 0 ]; then
-    echo 'alias vim="nvim"' >> /etc/bashrc
-    # source /etc/bashrc
+    echo 'alias vim="nvim"' >> $install_user_home/.bashrc
   fi
   # 安装 ctags
   yum -y install ctags
@@ -94,4 +94,4 @@ DownloadVimConfig
 DownloadPlugin
 # 4. 备份对应用户的 .vim 目录, 并且建立好连接, 并修改文件权限
 LinkDir
-echo '安装成功! 请手动执行 "source /etc/bashrc" 或者重启终端, 使 vim 配置生效!'
+echo '安装成功! 请手动执行 "source ~/.bashrc" 或者重启终端, 使 vim 配置生效!'
