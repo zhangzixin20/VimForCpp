@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 install_user_home=$1
-vimforcpp_home=/home/$install_user_home/.VimForCpp
+vimforcpp_home=$install_user_home/.VimForCpp
 
 function InstallEnv() {
   # 检查操作系统版本是否 ok
