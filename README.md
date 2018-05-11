@@ -20,6 +20,8 @@
 
 ## 卸载方法
 
+在安装了 VimForCpp 的用户下执行:
+
   bash ~/.VimForCpp/uninstall.sh
 
 ## 功能演示
@@ -100,3 +102,9 @@ vim-devicons依赖 Nerd Font
 
 其他字体可以参考文件  **xshell可用字体** 
 
+注意: 为了避免字体兼容性的问题, 显示图标功能默认已经关闭. 如需打开, 修改 ~/.vimrc 中的
+
+  
+  " Plug 'ryanoasis/vim-devicons'
+
+将行首的 " 去掉即可.
