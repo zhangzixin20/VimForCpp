@@ -14,8 +14,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'python-mode/python-mode'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/LeaderF'
-" 为了避免对字体的依赖导致的图标显示错乱的问题, 默认关闭了图标.
-" Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 
