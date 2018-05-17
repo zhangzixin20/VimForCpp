@@ -57,6 +57,11 @@ function GetWhiteList() {
   initvim=$1/vim/init.vim
   whitelist=$2/.git/info/sparse-checkout
   awk -F "[/\']" '{ if (index($1, "Plug") == 1) print $3; }' $initvim > $whitelist
+  if grep -q "YouCompleteMe" $whitelist; then
+    # 发现白名单中包含了 YCM, 则把对应的动态库的白名单也放进去.
+    # TODO 后续考虑根据操作系统版本来决定下载哪个库
+    echo "YCM.so" >> $whitelist
+  fi
 }
 
 function DownloadPlugin() {
@@ -71,9 +76,9 @@ function DownloadPlugin() {
   cp $bundle_dir/YCM.so/el7.x86_64/* $bundle_dir/YouCompleteMe/third_party/ycmd/
   if [ $? -ne 0 ]; then
     echo "插件下载失败!"
-  else
-    echo "插件下载完毕!"
+    exit 1
   fi
+  echo "插件下载完毕!"
 }
 
 function LinkDir() {
