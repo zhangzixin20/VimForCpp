@@ -14,6 +14,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'python-mode/python-mode'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/LeaderF'
+Plug 'cpiger/NeoDebug'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 
