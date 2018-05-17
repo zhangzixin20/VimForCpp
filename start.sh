@@ -54,7 +54,7 @@ function DownloadVimConfig() {
 
 function GetWhiteList() {
   # 分析 init.vim 中的插件列表, 获取到白名单内容, 并写入到 git 的对应文件中
-  initvim=$1/vim/base.vim
+  initvim=$1/vim/init.vim
   whitelist=$2/.git/info/sparse-checkout
   awk -F "[/\']" '{ if (index($1, "Plug") == 1) print $3; }' $initvim > $whitelist
   if grep -q "YouCompleteMe" $whitelist; then
