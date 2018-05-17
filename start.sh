@@ -52,15 +52,28 @@ function DownloadVimConfig() {
   echo "Vim 配置下载完毕"
 }
 
+function GetWhiteList() {
+  # 分析 init.vim 中的插件列表, 获取到白名单内容, 并写入到 git 的对应文件中
+  initvim=$1/vim/init.vim
+  whitelist=$2/.git/info/sparse-checkout
+  awk -F "[/\']" '{ if (index($1, "Plug") == 1) print $3; }' $initvim > $whitelist
+}
+
 function DownloadPlugin() {
   bundle_dir=$vimforcpp_home/vim/bundle
-  git clone https://gitee.com/HGtz2222/vim-plugin-fork.git $bundle_dir
-  if [ $? -ne 0 ]; then
-    echo "插件下载出错!"
-    exit 1
-  fi
+  mkdir -p $bundle_dir
+  cd $bundle_dir
+  git init
+  git remote add -f origin https://gitee.com/HGtz2222/vim-plugin-fork.git
+  git config core.sparsecheckout true 
+  GetWhiteList $vimforcpp_home $bundle_dir
+  git pull origin master  
   cp $bundle_dir/YCM.so/el7.x86_64/* $bundle_dir/YouCompleteMe/third_party/ycmd/
-  echo "插件下载完毕"
+  if [ $? -ne 0 ]; then
+    echo "插件下载失败!"
+  else
+    echo "插件下载完毕!"
+  fi
 }
 
 function LinkDir() {
