@@ -61,13 +61,6 @@
 
 ![文件查找](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E5%BF%AB%E9%80%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6.gif)
 
-### 调试集成
-TODO
-### 一键运行
-TODO
-### 文档注释
-TODO
-
 ## 快速使用
 
 ### 普通模式下快捷键
