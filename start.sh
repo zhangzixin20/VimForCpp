@@ -52,6 +52,18 @@ function DownloadVimConfig() {
   echo "Vim 配置下载完毕"
 }
 
+function PrepareForCquery() {
+  # 1. 安装依赖的库
+  if [ ! -f /usr/lib64/libatomic.so.1 ]; then
+    echo "未找到 libstdatomic, 尝试安装..."
+    yum install libatomic.x86_64
+  fi
+  # 2. 添加环境变量
+  if ! grep -q ".VimForCpp/vim/bundle/YCM.so/el7.x86_64"; then
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.VimForCpp/vim/bundle/YCM.so/el7.x86_64' >> ~/.bashrc
+  fi
+}
+
 function GetWhiteList() {
   # 分析 init.vim 中的插件列表, 获取到白名单内容, 并写入到 git 的对应文件中
   initvim=$1/vim/init.vim
@@ -61,6 +73,11 @@ function GetWhiteList() {
     # 发现白名单中包含了 YCM, 则把对应的动态库的白名单也放进去.
     # TODO 后续考虑根据操作系统版本来决定下载哪个库
     echo "YCM.so" >> $whitelist
+  fi
+
+  # 发现白名单中包含 cquery, 则需要准备后续的环境变量和安装额外的库
+  if grep -q "LanguageClient" $whitelist; then
+    PrepareForCquery
   fi
 }
 
