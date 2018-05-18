@@ -15,7 +15,12 @@ Plug 'python-mode/python-mode'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/LeaderF'
 Plug 'cpiger/NeoDebug'
+Plug 'cpiger/NeoDebug'
 Plug 'ryanoasis/vim-devicons'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 call plug#end()
 
 
@@ -266,9 +271,29 @@ let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrgger="<C-k>"
 
 
-"""""""""""""""""""""""""" LeadF
+"""""""""""""""""""""""""" LeaderF
 let g:Lf_WindowHeight = 0.30
 let g:Lf_ShortcutF = '<c-p>'
 nnoremap <space>fm :LeaderfMru<cr>
 nnoremap <space>ff :LeaderfFunction<cr>
 nnoremap <space>fb :LeaderfBuffer<cr>
+
+
+"""""""""""""""""""""""""" LeaderF
+let g:LanguageClient_serverCommands = {
+  \ 'cpp': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+  \ 'cxx': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+  \ 'cc': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+  \ 'c': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+  \ 'h': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+  \ 'hpp': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+\ }
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = '~/.VimForCpp/cquery/config/settings.json'
+
+nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
+nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
+nnoremap <silent> gn :call LanguageClient_textDocument_rename()<CR>
+
