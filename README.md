@@ -25,32 +25,42 @@
   bash ~/.VimForCpp/uninstall.sh
 
 ## 功能演示
-### 语法高亮
+### 概览
 
-
+![概览](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E6%A6%82%E8%A7%88.png)
 
 ### 自动补全(语义级别补全+模糊匹配)
-TODO
+
+![自动补全](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8.gif)
+
 ### 头文件补全
-TODO
-### 代码片段
-TODO
+
+![头文件补全](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E5%A4%B4%E6%96%87%E4%BB%B6%E8%A1%A5%E5%85%A8.gif)
+
 ### 语法诊断
-TODO
-### 跳转到变量/函数声明/定义
-TODO
-### 跳转到头文件
-TODO
+
+![语法诊断](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E8%AF%AD%E6%B3%95%E8%AF%8A%E6%96%AD.gif)
+
+### 跳转到变量/函数定义, 跳转到头文件
+
+![代码跳转](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E5%87%BD%E6%95%B0%E5%8F%98%E9%87%8F%E5%A4%B4%E6%96%87%E4%BB%B6%E8%B7%B3%E8%BD%AC.gif)
+
 ### 函数列表
 
 ![函数列表](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E5%87%BD%E6%95%B0%E5%88%97%E8%A1%A8.gif)
 
 ### 函数查找
-TODO
+
+![函数查找](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E5%BF%AB%E9%80%9F%E6%9F%A5%E6%89%BE%E5%87%BD%E6%95%B0.gif)
+
 ### 文件列表
-TODO
+
+![文件列表](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8.gif)
+
 ### 文件查找
-TODO
+
+![文件查找](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E5%BF%AB%E9%80%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6.gif)
+
 ### 调试集成
 TODO
 ### 一键运行
