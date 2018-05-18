@@ -26,7 +26,9 @@
 
 ## 功能演示
 ### 语法高亮
-TODO
+
+
+
 ### 自动补全(语义级别补全+模糊匹配)
 TODO
 ### 头文件补全
@@ -40,7 +42,9 @@ TODO
 ### 跳转到头文件
 TODO
 ### 函数列表
-TODO
+
+![函数列表](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E5%87%BD%E6%95%B0%E5%88%97%E8%A1%A8.gif)
+
 ### 函数查找
 TODO
 ### 文件列表
