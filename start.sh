@@ -76,9 +76,9 @@ function GetWhiteList() {
   fi
 
   # 发现白名单中包含 cquery, 则需要准备后续的环境变量和安装额外的库
-  if grep -q "LanguageClient" $whitelist; then
-    PrepareForCquery
-  fi
+  # if grep -q "LanguageClient" $whitelist; then
+  #   PrepareForCquery
+  # fi
 }
 
 function DownloadPlugin() {
