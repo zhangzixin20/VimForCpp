@@ -49,6 +49,8 @@ flags = [
 '/usr/include',
 '-isystem',
 '/usr/local/include',
+'-isystem',
+'/usr/include/c++/4.8.5',
 '-I','.',
 '-I','/home/tangzhong/third_part/include',
 '-I','./BiddingServer'
