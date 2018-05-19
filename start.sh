@@ -100,8 +100,8 @@ function InstallCQuery() {
     yum install libatomic.x86_64
   fi
   # 2. 添加环境变量
-  if ! grep -q ".VimForCpp/vim/bundle/YCM.so/el7.x86_64"; then
-    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.VimForCpp/vim/bundle/YCM.so/el7.x86_64' >> ~/.bashrc
+  if ! grep -q ".VimForCpp/vim/bundle/YCM.so/el7.x86_64" $install_user_home/.bashrc; then
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.VimForCpp/vim/bundle/YCM.so/el7.x86_64' >> $install_user_home/.bashrc
   fi
   # 3. 准备临时目录
   if [ -d /tmp/cquery -o -f /tmp/cquery ]; then
