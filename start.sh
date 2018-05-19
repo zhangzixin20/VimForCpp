@@ -88,6 +88,29 @@ function DownloadPlugin() {
   echo "插件下载完毕!"
 }
 
+function InstallCQuery() {
+  # 0. 检查如果不需要安装 cquery 就直接返回
+  if [ $install_cquery_flag -eq 0 ]; then
+    return 0;
+  fi
+  # 1. 安装依赖的库
+  if [ ! -f /usr/lib64/libatomic.so.1 ]; then
+    echo "未找到 libstdatomic, 尝试安装..."
+    yum install libatomic.x86_64
+  fi
+  # 2. 添加环境变量
+  if ! grep -q ".VimForCpp/vim/bundle/YCM.so/el7.x86_64"; then
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.VimForCpp/vim/bundle/YCM.so/el7.x86_64' >> ~/.bashrc
+  fi
+  # 3. 准备临时目录
+  if [ -d /tmp/cquery -o -f /tmp/cquery ]; then
+    rm -rf /tmp/cquery
+  fi
+  mkdir /tmp/cquery
+  mkdir /tmp/cquery/cache
+  cp $vimforcpp_home/cquery/config/settings.json /tmp/cquery/
+}
+
 function LinkDir() {
   # 先备份原有的 vim 配置文件
   today=`date +%m%d`
@@ -118,37 +141,14 @@ function LinkDir() {
   fi
 }
 
-function InstallCquery() {
-  # 0. 检查如果不需要安装 cquery 就直接返回
-  if [ $install_cquery_flag -eq 0 ]; then
-    return 0;
-  fi
-  # 1. 安装依赖的库
-  if [ ! -f /usr/lib64/libatomic.so.1 ]; then
-    echo "未找到 libstdatomic, 尝试安装..."
-    yum install libatomic.x86_64
-  fi
-  # 2. 添加环境变量
-  if ! grep -q ".VimForCpp/vim/bundle/YCM.so/el7.x86_64"; then
-    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.VimForCpp/vim/bundle/YCM.so/el7.x86_64' >> ~/.bashrc
-  fi
-  # 3. 准备临时目录
-  if [ -d /tmp/cquery -o -f /tmp/cquery ]; then
-    rm -rf /tmp/cquery
-  fi
-  mkdir /tmp/cquery
-  mkdir /tmp/cquery/cache
-  cp $vimforcpp_home/cquery/config/settings.json /tmp/cquery/
-}
-
 # 1. 检查并安装依赖的软件
 InstallEnv
 # 2. 从码云上下载 vim 配置
 DownloadVimConfig
 # 3. 从码云上下载依赖的插件
 DownloadPlugin
-# 4. 备份对应用户的 .vim 目录, 并且建立好连接, 并修改文件权限
+# 4. 决定是否安装 cquery
+InstallCQuery
+# 5. 备份对应用户的 .vim 目录, 并且建立好连接, 并修改文件权限
 LinkDir
-# 5. 决定是否安装 cquery
-InstallCquery
 echo '安装成功! 请手动执行 "source ~/.bashrc" 或者重启终端, 使 vim 配置生效!'
