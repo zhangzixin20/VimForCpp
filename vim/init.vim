@@ -296,6 +296,9 @@ let g:LanguageClient_settingsPath = '/tmp/cquery/settings.json'
 " 关闭 cquery 的诊断信息, 使用 Ycm 的足矣
 let g:LanguageClient_diagnosticsEnable=0
 
+" 指定项目的根目录标记.
+let g:LanguageClient_rootMarkers = ['.root', '.svn', '.git']
+
 nnoremap <c-k> :call LanguageClient_textDocument_definition()<CR>
 nnoremap <space>aa :call LanguageClient_textDocument_definition()<CR>
 nnoremap <space>as :call LanguageClient_textDocument_references()<CR>:lopen<CR>
