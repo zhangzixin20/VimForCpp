@@ -1,4 +1,5 @@
 #!/usr/bin/sh
+set -x
 install_user_home=$1
 vimforcpp_home=$install_user_home/.VimForCpp
 # 是否安装 cquery 标记.
