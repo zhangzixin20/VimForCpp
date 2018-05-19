@@ -279,17 +279,18 @@ nnoremap <space>ff :LeaderfFunction<cr>
 nnoremap <space>fb :LeaderfBuffer<cr>
 
 
-"""""""""""""""""""""""""" LeaderF
+"""""""""""""""""""""""""" cquery
 let g:LanguageClient_serverCommands = {
-  \ 'cpp': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
-  \ 'cxx': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
-  \ 'cc': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
-  \ 'c': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
-  \ 'h': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
-  \ 'hpp': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cq.log'],
+  \ 'cpp': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cquery/cq.log'],
+  \ 'cxx': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cquery/cq.log'],
+  \ 'hpp': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cquery/cq.log'],
+  \ 'cc': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cquery/cq.log'],
+  \ 'c': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cquery/cq.log'],
+  \ 'h': ['~/.VimForCpp/cquery/bin/cquery', '--log-file=/tmp/cquery/cq.log'],
 \ }
+
 let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = '~/.VimForCpp/cquery/config/settings.json'
+let g:LanguageClient_settingsPath = '/tmp/cquery/settings.json'
 
 nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>

@@ -1,6 +1,8 @@
 #!/usr/bin/sh
 install_user_home=$1
 vimforcpp_home=$install_user_home/.VimForCpp
+# 是否安装 cquery 标记.
+install_cquery_flag=0
 
 function InstallEnv() {
   # 检查操作系统版本是否 ok
@@ -52,18 +54,6 @@ function DownloadVimConfig() {
   echo "Vim 配置下载完毕"
 }
 
-function PrepareForCquery() {
-  # 1. 安装依赖的库
-  if [ ! -f /usr/lib64/libatomic.so.1 ]; then
-    echo "未找到 libstdatomic, 尝试安装..."
-    yum install libatomic.x86_64
-  fi
-  # 2. 添加环境变量
-  if ! grep -q ".VimForCpp/vim/bundle/YCM.so/el7.x86_64"; then
-    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.VimForCpp/vim/bundle/YCM.so/el7.x86_64' >> ~/.bashrc
-  fi
-}
-
 function GetWhiteList() {
   # 分析 init.vim 中的插件列表, 获取到白名单内容, 并写入到 git 的对应文件中
   initvim=$1/vim/init.vim
@@ -76,9 +66,9 @@ function GetWhiteList() {
   fi
 
   # 发现白名单中包含 cquery, 则需要准备后续的环境变量和安装额外的库
-  # if grep -q "LanguageClient" $whitelist; then
-  #   PrepareForCquery
-  # fi
+  if grep -q "LanguageClient" $whitelist; then
+    install_cquery_flag=1
+  fi
 }
 
 function DownloadPlugin() {
@@ -120,7 +110,37 @@ function LinkDir() {
   chown -R $install_user:$install_user $install_user_home/.vim
   chown -R $install_user:$install_user $install_user_home/.vimrc
   chown -R $install_user:$install_user $install_user_home/.ycm_extra_conf.py
+
+  if [ $install_cquery_flag -eq 1 ]; then
+    chown -R $install_user:$install_user /tmp/cquery
+    ln -s $vimforcpp_home/cquery/config/cquery.config $install_user_home/.cquery
+    chown -R $install_user:$install_user $install_user_home/.cquery
+  fi
 }
+
+function InstallCquery() {
+  # 0. 检查如果不需要安装 cquery 就直接返回
+  if [ $install_cquery_flag -eq 0 ]; then
+    return 0;
+  fi
+  # 1. 安装依赖的库
+  if [ ! -f /usr/lib64/libatomic.so.1 ]; then
+    echo "未找到 libstdatomic, 尝试安装..."
+    yum install libatomic.x86_64
+  fi
+  # 2. 添加环境变量
+  if ! grep -q ".VimForCpp/vim/bundle/YCM.so/el7.x86_64"; then
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.VimForCpp/vim/bundle/YCM.so/el7.x86_64' >> ~/.bashrc
+  fi
+  # 3. 准备临时目录
+  if [ -d /tmp/cquery -o -f /tmp/cquery ]; then
+    rm -rf /tmp/cquery
+  fi
+  mkdir /tmp/cquery
+  mkdir /tmp/cquery/cache
+  cp $vimforcpp_home/cquery/config/settings.json /tmp/cquery/
+}
+
 # 1. 检查并安装依赖的软件
 InstallEnv
 # 2. 从码云上下载 vim 配置
@@ -129,4 +149,6 @@ DownloadVimConfig
 DownloadPlugin
 # 4. 备份对应用户的 .vim 目录, 并且建立好连接, 并修改文件权限
 LinkDir
+# 5. 决定是否安装 cquery
+InstallCquery
 echo '安装成功! 请手动执行 "source ~/.bashrc" 或者重启终端, 使 vim 配置生效!'

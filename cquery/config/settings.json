@@ -1,6 +1,6 @@
 {
   "initializationOptions": {
-      "cacheDirectory": "~/.VimForCpp/cquery/cache"
+      "cacheDirectory": "/tmp/cquery/cache"
   }
 
 }
