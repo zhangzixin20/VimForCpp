@@ -301,6 +301,7 @@ let g:LanguageClient_rootMarkers = ['.root', '.svn', '.git']
 
 nnoremap <c-k> :call LanguageClient_textDocument_definition()<CR>
 nnoremap <space>aa :call LanguageClient_textDocument_definition()<CR>
+" 此处有点瑕疵. 由于cquery中的操作都是异步完成的, 可能调用列表还没生成就尝试 lopen, 导致没有得到任何结果
 nnoremap <space>as :call LanguageClient_textDocument_references()<CR>:lopen<CR>
 nnoremap <space>ad :call LanguageClient_textDocument_rename()<CR>
 nnoremap <space>af :call LanguageClient_textDocument_hover()<CR>
