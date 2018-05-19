@@ -61,6 +61,15 @@
 
 ![文件查找](https://gitee.com/HGtz2222/VimForCpp/raw/master/screenshot/%E5%BF%AB%E9%80%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6.gif)
 
+### 变量重命名
+TODO
+
+### 查找函数调用位置
+TODO
+
+### 快速查看函数声明
+TODO
+
 ## 快速使用
 
 ### 普通模式下快捷键
