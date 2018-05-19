@@ -303,6 +303,6 @@ nnoremap <c-k> :call LanguageClient_textDocument_definition()<CR>
 nnoremap <space>aa :call LanguageClient_textDocument_definition()<CR>
 nnoremap <space>as :call LanguageClient_textDocument_references()<CR>:lopen<CR>
 nnoremap <space>ad :call LanguageClient_textDocument_rename()<CR>
-nnoremap <space>af :call LanguageClient_textDocument_documentSymbol()<CR>:lopen<CR>
-nnoremap <space>ag :call LanguageClient_textDocument_hover()<CR>
+nnoremap <space>af :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <space>ag :call LanguageClient_textDocument_documentSymbol()<CR>:lopen<CR>
 
