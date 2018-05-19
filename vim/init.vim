@@ -204,7 +204,8 @@ endfunc
 
 """""""""""""""""""""""""" YouCompleteMe
 nnoremap <C-l> <c-o>
-nnoremap <C-k> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 使用 cquery 能得到更好的跳转效果.
+" nnoremap <C-k> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F11> :YcmDiags<CR>
 
 set completeopt=longest,menu
@@ -274,9 +275,9 @@ let g:UltiSnipsJumpBackwardTrgger="<C-k>"
 """""""""""""""""""""""""" LeaderF
 let g:Lf_WindowHeight = 0.30
 let g:Lf_ShortcutF = '<c-p>'
-nnoremap <space>fm :LeaderfMru<cr>
-nnoremap <space>ff :LeaderfFunction<cr>
-nnoremap <space>fb :LeaderfBuffer<cr>
+nnoremap <space>sa :LeaderfMru<cr>
+nnoremap <space>ss :LeaderfFunction<cr>
+nnoremap <space>sd :LeaderfBuffer<cr>
 
 
 """""""""""""""""""""""""" cquery
@@ -292,9 +293,13 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = '/tmp/cquery/settings.json'
 
-nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
-nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> gn :call LanguageClient_textDocument_rename()<CR>
+" 关闭 cquery 的诊断信息, 使用 Ycm 的足矣
+let g:LanguageClient_diagnosticsEnable=0
+
+nnoremap <c-k> :call LanguageClient_textDocument_definition()<CR>
+nnoremap <space>aa :call LanguageClient_textDocument_definition()<CR>
+nnoremap <space>as :call LanguageClient_textDocument_references()<CR>:lopen<CR>
+nnoremap <space>ad :call LanguageClient_textDocument_rename()<CR>
+nnoremap <space>af :call LanguageClient_textDocument_documentSymbol()<CR>:lopen<CR>
+nnoremap <space>ag :call LanguageClient_textDocument_hover()<CR>
 
