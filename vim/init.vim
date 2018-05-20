@@ -73,24 +73,6 @@ if has("autocmd")
 endif
 
 
-"""""""""""""""""""""""""" 按键映射
-" 调整窗口移动
-nnoremap H <C-w>h
-nnoremap J <C-w>j
-nnoremap K <C-w>k
-nnoremap L <C-w>l
-" 快速保存
-nnoremap <space>w :w<cr>
-inoremap jk <esc>:w<cr>
-inoremap <esc> <esc>:w<cr>
-" 快速缩进
-vnoremap < <gv
-vnoremap > >gv
-" 快速打开标签页
-nnoremap <space>t :AT<cr>
-nnoremap <space>e :tabe 
-
-
 """""""""""""""""""""""""" airline 彩色状态栏/标签页
 " 这几个是挑选的还不错的几个 airline 主题
 " let g:airline_theme="ravenpower"
@@ -169,7 +151,6 @@ set foldmethod=indent
 set foldlevel=99
 " 代码折叠自定义快捷键 zz
 let g:FoldMethod = 0
-nnoremap zz :call ToggleFold()<cr>
 fun! ToggleFold()
     if g:FoldMethod == 0
         exe "normal! zM"
@@ -182,7 +163,6 @@ endfun
 
 
 """""""""""""""""""""""""" 快速运行(按下 F5 快速运行)
-nnoremap <F5> :call Compile()<cr>
 func! Compile()
     exec "w"
     if &filetype == 'c'
@@ -203,11 +183,6 @@ endfunc
 
 
 """""""""""""""""""""""""" YouCompleteMe
-nnoremap <C-l> <c-o>
-" 使用 cquery 能得到更好的跳转效果.
-" nnoremap <C-k> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <F11> :YcmDiags<CR>
-
 set completeopt=longest,menu
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
@@ -234,25 +209,19 @@ let g:ycm_semantic_triggers =  {
 
 
 """""""""""""""""""""""""" Tagbar(函数列表)
-nnoremap <F6> :TagbarToggle<CR>
 let g:tagbar_ctags_bin='/usr/bin/ctags'
 let g:tagbar_width=20
 let g:tagbar_left=1
 let g:tagbar_sort = 0
 
 
-"""""""""""""""""""""""""" Dox(注释文档)
-nnoremap <F8> :Dox<RETURN><ESC>
-
-
 """""""""""""""""""""""""" NERDTree(文件列表)
-nnoremap <F7> :NERDTreeToggle<RETURN>
 let g:NERDTreeWinPos="right"
 let g:NERDTreeWinSize=20
 
 
 """""""""""""""""""""""""" CtrlP(快速查找文件)
-let g:ctrlp_working_path_mode='a'
+" let g:ctrlp_working_path_mode='a'
 
 
 """""""""""""""""""""""""" cpp-enhanced-highlight(c++ 语法高亮)
@@ -274,10 +243,6 @@ let g:UltiSnipsJumpBackwardTrgger="<C-k>"
 
 """""""""""""""""""""""""" LeaderF
 let g:Lf_WindowHeight = 0.30
-let g:Lf_ShortcutF = '<c-p>'
-nnoremap <space>sa :LeaderfMru<cr>
-nnoremap <space>ss :LeaderfFunction<cr>
-nnoremap <space>sd :LeaderfBuffer<cr>
 
 
 """""""""""""""""""""""""" cquery
@@ -299,11 +264,66 @@ let g:LanguageClient_diagnosticsEnable=0
 " 指定项目的根目录标记.
 let g:LanguageClient_rootMarkers = ['.root', '.svn', '.git']
 
-nnoremap <c-k> :call LanguageClient_textDocument_definition()<CR>
-nnoremap <space>aa :call LanguageClient_textDocument_definition()<CR>
-" 此处有点瑕疵. 由于cquery中的操作都是异步完成的, 可能调用列表还没生成就尝试 lopen, 导致没有得到任何结果
-nnoremap <space>as :call LanguageClient_textDocument_references()<CR>:lopen<CR>
-nnoremap <space>ad :call LanguageClient_textDocument_rename()<CR>
-nnoremap <space>af :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <space>ag :call LanguageClient_textDocument_documentSymbol()<CR>:lopen<CR>
 
+"""""""""""""""""""""""""" 按键映射(统一规划)
+
+""" 窗口
+" 切换 .h / .c
+nnoremap <space>aa :AT<cr>
+" 快速打开标签页
+nnoremap <space>as :tabe 
+" 打开函数列表
+nnoremap <space>ad :TagbarToggle<CR>
+" 打开文件列表
+nnoremap <space>af :NERDTreeToggle<RETURN>
+
+""" 查找
+" 按MRU规则查找文件
+nnoremap <space>sa :LeaderfMru<cr>
+" 查找当前文件中的函数
+nnoremap <space>ss :LeaderfFunction<cr>
+" 在所有 buffer 中进行函数查找
+nnoremap <space>sd :LeaderfBuffer<cr>
+" 按文件名查找文件
+" let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutF = '<space>sf'
+
+""" 调试
+" 使用 cquery 能得到更好的跳转效果.
+nnoremap <space>da :call Compile()<cr>
+
+""" 语义
+" 跳转到定义
+nnoremap <c-k> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 返回到跳转前的位置
+nnoremap <c-l> <c-o>
+nnoremap <space>fa :call LanguageClient_textDocument_definition()<CR>
+" 查找所有被调用的函数. 此处有点瑕疵. 由于cquery中的操作都是异步完成的, 可能调用列表还没生成就尝试 lopen, 导致没有得到任何结果
+nnoremap <space>fs :call LanguageClient_textDocument_references()<CR>:lopen<CR>
+nnoremap <space>fd :call LanguageClient_textDocument_rename()<CR>
+" 修正光标处的代码错误
+nnoremap <space>ff :YcmCompleter FixIt<CR>
+" 查看光标处的函数信息
+nnoremap <space>fg :call LanguageClient_textDocument_hover()<CR>
+" 诊断错误
+nnoremap <space>fq :YcmDiags<CR>
+
+""" 格式
+" 添加文档注释
+nnoremap <space>ga :Dox<RETURN><ESC>
+" 函数折叠
+nnoremap <space>gs :call ToggleFold()<cr>
+
+""" 其他
+" 调整窗口移动
+nnoremap H <C-w>h
+nnoremap J <C-w>j
+nnoremap K <C-w>k
+nnoremap L <C-w>l
+" 快速保存
+inoremap jk <esc>:w<cr>
+nnoremap <esc> :w<cr>
+inoremap <esc> <esc>:w<cr>
+" 快速缩进
+vnoremap < <gv
+vnoremap > >gv
