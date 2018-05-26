@@ -266,53 +266,128 @@ let g:LanguageClient_rootMarkers = ['.root', '.svn', '.git']
 
 
 """""""""""""""""""""""""" 按键映射(统一规划)
-
-""" 窗口
-" 切换 .h / .c
-nnoremap <space>aa :AT<cr>
-" 快速打开标签页
-nnoremap <space>as :tabe 
-" 打开函数列表
-nnoremap <space>ad :TagbarToggle<CR>
-" 打开文件列表
-nnoremap <space>af :NERDTreeToggle<RETURN>
-
-""" 查找
-" 按MRU规则查找文件
-nnoremap <space>sa :LeaderfMru<cr>
-" 查找当前文件中的函数
-nnoremap <space>ss :LeaderfFunction<cr>
-" 在所有 buffer 中进行函数查找
-nnoremap <space>sd :LeaderfBuffer<cr>
-" 按文件名查找文件
-" let g:Lf_ShortcutF = '<c-p>'
-let g:Lf_ShortcutF = '<space>sf'
-
-""" 调试
-" 使用 cquery 能得到更好的跳转效果.
-nnoremap <space>da :call Compile()<cr>
-
-""" 语义
 " 跳转到定义
 nnoremap <c-k> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 返回到跳转前的位置
 nnoremap <c-l> <c-o>
-nnoremap <space>fa :call LanguageClient_textDocument_definition()<CR>
-" 查找所有被调用的函数. 此处有点瑕疵. 由于cquery中的操作都是异步完成的, 可能调用列表还没生成就尝试 lopen, 导致没有得到任何结果
-nnoremap <space>fs :call LanguageClient_textDocument_references()<CR>:lopen<CR>
-nnoremap <space>fd :call LanguageClient_textDocument_rename()<CR>
-" 修正光标处的代码错误
-nnoremap <space>ff :YcmCompleter FixIt<CR>
-" 查看光标处的函数信息
-nnoremap <space>fg :call LanguageClient_textDocument_hover()<CR>
-" 诊断错误
-nnoremap <space>fq :YcmDiags<CR>
 
-""" 格式
-" 添加文档注释
-nnoremap <space>ga :Dox<RETURN><ESC>
-" 函数折叠
-nnoremap <space>gs :call ToggleFold()<cr>
+" """ 窗口
+" " 切换 .h / .c
+" nnoremap <space>aa :AT<cr>
+" " 快速打开标签页
+" nnoremap <space>as :tabe 
+" " 打开函数列表
+" nnoremap <space>ad :TagbarToggle<CR>
+" " 打开文件列表
+" nnoremap <space>af :NERDTreeToggle<RETURN>
+" 
+" """ 查找
+" " 按MRU规则查找文件
+" nnoremap <space>sa :LeaderfMru<cr>
+" " 查找当前文件中的函数
+" nnoremap <space>ss :LeaderfFunction<cr>
+" " 在所有 buffer 中进行函数查找
+" nnoremap <space>sd :LeaderfBuffer<cr>
+" " 按文件名查找文件
+" " let g:Lf_ShortcutF = '<c-p>'
+" let g:Lf_ShortcutF = '<space>sf'
+" 
+" """ 调试
+" nnoremap <space>da :call Compile()<cr>
+" 
+" """ 语义
+" nnoremap <space>fa :call LanguageClient_textDocument_definition()<CR>
+" " 查找所有被调用的函数. 此处有点瑕疵. 由于cquery中的操作都是异步完成的, 可能调用列表还没生成就尝试 lopen, 导致没有得到任何结果
+" nnoremap <space>fs :call LanguageClient_textDocument_references()<CR>:lopen<CR>
+" nnoremap <space>fd :call LanguageClient_textDocument_rename()<CR>
+" " 修正光标处的代码错误
+" nnoremap <space>ff :YcmCompleter FixIt<CR>
+" " 查看光标处的函数信息
+" nnoremap <space>fg :call LanguageClient_textDocument_hover()<CR>
+" " 诊断错误
+" nnoremap <space>fq :YcmDiags<CR>
+" 
+" """ 格式
+" " 添加文档注释
+" nnoremap <space>ga :Dox<RETURN><ESC>
+" " 函数折叠
+" nnoremap <space>gs :call ToggleFold()<cr>
+
+""" 快捷键提示
+function GuideEsc()
+	unmap a
+	unmap s
+	unmap d
+	unmap f
+	unmap g
+	unmap q
+	unmap <esc>
+	echo ""
+endfunction
+
+function MenuA()
+	echo "[a] .h/.c  [s] 标签页  [d] 函数列表  [f] 文件列表  [q] 取消"
+	nnoremap <silent><nowait> a :call GuideEsc()<cr>:AT<cr>
+	nnoremap <nowait> s :call GuideEsc()<cr>:tabe 
+	nnoremap <silent><nowait> d :call GuideEsc()<cr>:TagbarToggle<cr>
+	nnoremap <silent><nowait> f :call GuideEsc()<cr>:NERDTreeToggle<cr>
+	nnoremap <silent><nowait> q :call GuideEsc()<cr>
+	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
+endfunction
+
+function MenuS()
+	echo "[a] 最近文件  [s] 打开文件  [d] 当前文件查找  [f] 打开文件查找  [q] 取消"
+	nnoremap <silent><nowait> a :call GuideEsc()<cr>:LeaderfMru<cr>
+	nnoremap <silent><nowait> s :call GuideEsc()<cr>:LeaderfFile<cr>
+	nnoremap <silent><nowait> d :call GuideEsc()<cr>:LeaderfFunction<cr>
+	nnoremap <silent><nowait> f :call GuideEsc()<cr>:LeaderfBuffer<cr>
+	nnoremap <silent><nowait> q :call GuideEsc()<cr>
+	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
+endfunction
+
+function MenuD()
+	echo "[a] 编译运行  [q] 取消"
+	nnoremap <silent><nowait> a :call GuideEsc()<cr>:call Compile()<cr>
+endfunction
+
+function MenuF()
+  echo "[a] 跳转定义  [s] 查找引用  [d] 重命名  [f] 修正错误  [g] 函数签名  [q] 取消"
+	nnoremap <silent><nowait> a :call GuideEsc()<cr>:call LanguageClient_textDocument_definition()<CR>
+	nnoremap <silent><nowait> s :call GuideEsc()<cr>:call LanguageClient_textDocument_references()<CR>:lopen<CR>:lopen<CR>
+	nnoremap <silent><nowait> d :call GuideEsc()<cr>:call LanguageClient_textDocument_rename()<CR>
+	nnoremap <silent><nowait> f :call GuideEsc()<cr>:YcmCompleter FixIt<CR>
+	nnoremap <silent><nowait> g :call GuideEsc()<cr>:call LanguageClient_textDocument_hover()<CR>
+	nnoremap <silent><nowait> q :call GuideEsc()<cr>
+	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
+endfunction
+
+function MenuG()
+	echo "[a] 文档注释  [s] 折叠/展开  [q] 取消"
+	nnoremap <silent><nowait> a :call GuideEsc()<cr>:Dox<cr><esc>
+	nnoremap <silent><nowait> s :call GuideEsc()<cr>:call ToggleFold()<cr>
+	nnoremap <silent><nowait> q :call GuideEsc()<cr>
+	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
+	" TODO 快速注释和格式整理
+endfunction
+
+function GuideMapTopMenu()
+	nnoremap <silent><nowait> a :call MenuA()<cr>
+	nnoremap <silent><nowait> s :call MenuS()<cr>
+	nnoremap <silent><nowait> d :call MenuD()<cr>
+	nnoremap <silent><nowait> f :call MenuF()<cr>
+	nnoremap <silent><nowait> g :call MenuG()<cr>
+	nnoremap <silent><nowait> q :call GuideEsc()<cr>
+	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
+endfunction
+
+nnoremap <silent><nowait> <space> :call GuideEntry()<cr>
+function GuideEntry()
+	" 1. 重新映射相关快捷键到 space
+	call GuideMapTopMenu()
+	" 2. 打印菜单
+	echo "[a] 窗口  [s] 查找  [d] 调试  [f] 语义  [g] 格式  [w] 选项  [q] 取消"
+endfunction
+
 
 """ 其他
 " 调整窗口移动
