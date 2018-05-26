@@ -313,7 +313,25 @@ nnoremap <c-l> <c-o>
 " " 函数折叠
 " nnoremap <space>gs :call ToggleFold()<cr>
 
-""" 快捷键提示
+""""""""""""""""""""""" 快捷键提示
+" 切换鼠标状态
+function! MouseToggle()
+	if &mouse ==# ""
+		set mouse=a	
+	else 
+		set mouse=
+	endif
+endfunction
+
+" 切换绝对行号和相对行号
+function! NumToggle()
+  if &relativenumber ==# "norelativenumber"
+    set relativenumber
+  else
+    set norelativenumber
+  endif
+endfunction
+
 function GuideEsc()
 	unmap a
 	unmap s
@@ -368,6 +386,16 @@ function MenuG()
 	nnoremap <silent><nowait> q :call GuideEsc()<cr>
 	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
 	" TODO 快速注释和格式整理
+endfunction
+
+function MenuW()
+  echo "[a] 切换鼠标  [s] 切换粘贴  [d] 切换行号  [f] 不可见字符  [q] 取消"
+	nnoremap <silent><nowait> a :call GuideEsc()<cr>:call MouseToggle()<cr>
+	nnoremap <silent><nowait> s :call GuideEsc()<cr>:set paste!<cr>
+	nnoremap <silent><nowait> d :call GuideEsc()<cr>:set NumToggle()<cr>
+	nnoremap <silent><nowait> f :call GuideEsc()<cr>:set list!<cr>
+	nnoremap <silent><nowait> q :call GuideEsc()<cr>
+	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
 endfunction
 
 function GuideMapTopMenu()
