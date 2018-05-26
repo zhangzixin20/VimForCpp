@@ -338,6 +338,7 @@ function GuideEsc()
 	unmap d
 	unmap f
 	unmap g
+	unmap w
 	unmap q
 	unmap <esc>
 	echo ""
@@ -404,6 +405,7 @@ function GuideMapTopMenu()
 	nnoremap <silent><nowait> d :call MenuD()<cr>
 	nnoremap <silent><nowait> f :call MenuF()<cr>
 	nnoremap <silent><nowait> g :call MenuG()<cr>
+	nnoremap <silent><nowait> w :call MenuW()<cr>
 	nnoremap <silent><nowait> q :call GuideEsc()<cr>
 	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
 endfunction
