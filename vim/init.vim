@@ -393,7 +393,7 @@ function MenuW()
   echo "[a] 切换鼠标  [s] 切换粘贴  [d] 切换行号  [f] 不可见字符  [q] 取消"
 	nnoremap <silent><nowait> a :call GuideEsc()<cr>:call MouseToggle()<cr>
 	nnoremap <silent><nowait> s :call GuideEsc()<cr>:set paste!<cr>
-	nnoremap <silent><nowait> d :call GuideEsc()<cr>:set NumToggle()<cr>
+	nnoremap <silent><nowait> d :call GuideEsc()<cr>:call NumToggle()<cr>
 	nnoremap <silent><nowait> f :call GuideEsc()<cr>:set list!<cr>
 	nnoremap <silent><nowait> q :call GuideEsc()<cr>
 	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
