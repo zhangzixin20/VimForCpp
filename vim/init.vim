@@ -355,11 +355,11 @@ function MenuA()
 endfunction
 
 function MenuS()
-	echo "[a] 最近文件  [s] 打开文件  [d] 当前文件查找  [f] 打开文件查找  [q] 取消"
+	echo "[a] 最近文件  [s] 打开文件  [d] buffer查找   [f] 查找函数   [q] 取消"
 	nnoremap <silent><nowait> a :call GuideEsc()<cr>:LeaderfMru<cr>
 	nnoremap <silent><nowait> s :call GuideEsc()<cr>:LeaderfFile<cr>
-	nnoremap <silent><nowait> d :call GuideEsc()<cr>:LeaderfFunction<cr>
-	nnoremap <silent><nowait> f :call GuideEsc()<cr>:LeaderfBuffer<cr>
+	nnoremap <silent><nowait> d :call GuideEsc()<cr>:LeaderfBuffer<cr>
+	nnoremap <silent><nowait> f :call GuideEsc()<cr>:LeaderfFunction<cr>
 	nnoremap <silent><nowait> q :call GuideEsc()<cr>
 	nnoremap <silent><nowait> <esc> :call GuideEsc()<cr>
 endfunction
