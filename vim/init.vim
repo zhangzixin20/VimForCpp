@@ -261,6 +261,10 @@ let g:LanguageClient_diagnosticsEnable=0
 let g:LanguageClient_rootMarkers = ['.root', '.svn', '.git']
 
 
+""""""""""""""""""""""" PyMode
+let g:pymode_lint_cwindow = 0
+
+
 """"""""""""""""""""""" 按键映射和快捷键提示
 " 跳转到定义
 nnoremap <c-k> :YcmCompleter GoToDefinitionElseDeclaration<CR>
