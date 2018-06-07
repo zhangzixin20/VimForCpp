@@ -263,7 +263,7 @@ let g:LanguageClient_rootMarkers = ['.root', '.svn', '.git']
 
 """"""""""""""""""""""" PyMode
 let g:pymode_lint_cwindow = 0
-let g:pymode_lint_ignore = ["E305", "E501", "E302", "E391", "W391",]
+let g:pymode_lint_ignore = ["E305", "E501", "E302", "E391", "W391", "W605",]
 
 
 """"""""""""""""""""""" 按键映射和快捷键提示
