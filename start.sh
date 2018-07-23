@@ -33,9 +33,8 @@ function InstallEnv() {
     exit 1
   fi
   # 由于 centos7 yum 源上默认的 neovim 升级到了 neovim 0.3.0, 但是这个版本
-  # 目前还有问题. 所以仍然需要下载 neovim 0.2.2
+  # 目前还有问题. 所以仍然需要使用 neovim 0.2.2. 上面的操作只是为了安装 Python 扩展
   yum install -y fuse-libs.x86_64 fuse.x86_64
-  wget "https://github.com/neovim/neovim/releases/download/v0.2.2/nvim.appimage" -O $vimforcpp_home/nvim
   # 敲下 vim 命令实际启动了 nvim
   touch $install_user_home/.bashrc
   grep -q "nvim" $install_user_home/.bashrc
