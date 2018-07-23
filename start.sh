@@ -32,11 +32,15 @@ function InstallEnv() {
     echo "neovim 安装失败!"
     exit 1
   fi
+  # 由于 centos7 yum 源上默认的 neovim 升级到了 neovim 0.3.0, 但是这个版本
+  # 目前还有问题. 所以仍然需要下载 neovim 0.2.2
+  yum install -y fuse-libs.x86_64 fuse.x86_64
+  wget "https://github.com/neovim/neovim/releases/download/v0.2.2/nvim.appimage" -O $vimforcpp_home/nvim
   # 敲下 vim 命令实际启动了 nvim
   touch $install_user_home/.bashrc
   grep -q "nvim" $install_user_home/.bashrc
   if [ $? -ne 0 ]; then
-    echo 'alias vim="nvim"' >> $install_user_home/.bashrc
+    echo "alias vim='$vimforcpp_home/nvim'" >> $install_user_home/.bashrc
   fi
   # 安装 ctags
   yum -y install ctags
@@ -134,6 +138,7 @@ function LinkDir() {
   chown -R $install_user:$install_user $install_user_home/.vim
   chown -R $install_user:$install_user $install_user_home/.vimrc
   chown -R $install_user:$install_user $install_user_home/.ycm_extra_conf.py
+  chown -R $install_user:$install_user $vimforcpp_home/nvim
 
   if [ $install_cquery_flag -eq 1 ]; then
     chown -R $install_user:$install_user /tmp/cquery
