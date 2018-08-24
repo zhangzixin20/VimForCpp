@@ -37,10 +37,8 @@ function InstallEnv() {
   yum install -y fuse-libs.x86_64 fuse.x86_64
   # 敲下 vim 命令实际启动了 nvim
   touch $install_user_home/.bashrc
-  grep -q "nvim" $install_user_home/.bashrc
-  if [ $? -ne 0 ]; then
-    echo "alias vim='$vimforcpp_home/nvim'" >> $install_user_home/.bashrc
-  fi
+  echo "alias vim='$vimforcpp_home/nvim'" >> $install_user_home/.bashrc
+
   # 安装 ctags
   yum -y install ctags
   echo "环境检测完毕!"
