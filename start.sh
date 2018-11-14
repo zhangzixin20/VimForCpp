@@ -64,6 +64,7 @@ function GetWhiteList() {
   if grep -q "YouCompleteMe" $whitelist; then
     # 发现白名单中包含了 YCM, 则把对应的动态库的白名单也放进去.
     # TODO 后续考虑根据操作系统版本来决定下载哪个库
+    echo "YCM.zip" >> $whitelist
     echo "YCM.so" >> $whitelist
   fi
 
