@@ -82,6 +82,8 @@ function DownloadPlugin() {
   git config core.sparsecheckout true 
   GetWhiteList $vimforcpp_home $bundle_dir
   git pull origin master  
+  # 增加对 YCM 的解压缩
+  unzip YCM.zip
   cp $bundle_dir/YCM.so/el7.x86_64/* $bundle_dir/YouCompleteMe/third_party/ycmd/
   if [ $? -ne 0 ]; then
     echo "插件下载失败!"

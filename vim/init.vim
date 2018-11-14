@@ -20,6 +20,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+"Plug 'fatih/vim-go'
 call plug#end()
 
 
