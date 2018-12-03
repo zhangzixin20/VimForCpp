@@ -302,6 +302,10 @@ function GuideEsc()
 	unmap <esc>
 	echo ""
 endfunction
+function Terminal()
+	sp
+	terminal
+endfunction
 
 function MenuA()
   echo "[a] 跳转定义  [s] 查找引用  [d] 重命名  [f] 修正错误  [g] 函数签名  [q] 取消"
@@ -391,6 +395,7 @@ function GuideMapTopMenu()
 	nnoremap <silent><nowait> s :call MenuS()<cr>
 	nnoremap <silent><nowait> d :call MenuD()<cr>
 	nnoremap <silent><nowait> f :call MenuF()<cr>
+	nnoremap <silent><nowait> t :call Terminal()<cr>
 	nnoremap <silent><nowait> g <nop>
 	nnoremap <silent><nowait> w :call MenuW()<cr>
 	nnoremap <silent><nowait> q :call GuideEsc()<cr>
@@ -402,7 +407,7 @@ function GuideEntry()
 	" 1. 重新映射相关快捷键到 space
 	call GuideMapTopMenu()
 	" 2. 打印菜单
-	echo "[a] 语义  [s] 查找  [d] 调试  [f] 窗口  [w] 其他  [q] 取消"
+	echo "[a] 语义  [s] 查找  [d] 调试  [f] 窗口  [w] 其他  [q] 取消  [t] 终端"
 endfunction
 
 
