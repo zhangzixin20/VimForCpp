@@ -41,6 +41,8 @@ function InstallEnv() {
 
   # 安装 ctags
   yum -y install ctags
+  # 安装 unzip
+  yum -y install unzip
   echo "环境检测完毕!"
 }
 
@@ -101,7 +103,7 @@ function InstallCQuery() {
   # 1. 安装依赖的库
   if [ ! -f /usr/lib64/libatomic.so.1 ]; then
     echo "未找到 libstdatomic, 尝试安装..."
-    yum install libatomic.x86_64
+    yum install -y libatomic.x86_64
   fi
   # 2. 添加环境变量
   if ! grep -q ".VimForCpp/vim/bundle/YCM.so/el7.x86_64" $install_user_home/.bashrc; then
