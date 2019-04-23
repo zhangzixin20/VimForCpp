@@ -26,7 +26,7 @@ function InstallEnv() {
   # 安装 neovim
   echo "尝试安装 neovim"
   yum -y install epel-release
-  yum install -y neovim.x86_64 python2-neovim.noarch
+  yum install -y neovim.x86_64 python36-neovim.noarch
   nvim --version
   if [ $? -ne 0 ]; then
     echo "neovim 安装失败!"
