@@ -14,7 +14,7 @@ install_user_home=$HOME
 function SwitchRoot() {
   echo "为了安装依赖程序, 需要使用 root 账户. 您的密码不会被上传."
   echo "请输入 root 密码:"
-  su -c "curl -sLf https://gitee.com/HGtz2222/VimForCpp/raw/master/start.sh -o /tmp/start.sh && bash /tmp/start.sh $install_user_home"
+  su -c "curl -sLf https://github.com/zhangzixin20/VimForCpp/raw/master/start.sh -o /tmp/start.sh && bash /tmp/start.sh $install_user_home"
   rm -f /tmp/start.sh > /dev/null 2>&1
 }
 
